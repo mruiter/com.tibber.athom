@@ -37,7 +37,7 @@ export const queries = {
       viewer {
         home(id:"${homeId}") {
           currentSubscription {
-            priceInfo {
+            priceInfo(resolution: QUARTER_HOURLY) {
               today {
                 total
                 energy
