@@ -9,6 +9,12 @@ describe('helpers', () => {
       const actual = min(values, (item) => item.value);
       expect(actual).toStrictEqual({ value: 2 });
     });
+
+    test('empty array', () => {
+      const values: { value: number }[] = [];
+      const actual = min(values, (item) => item.value);
+      expect(actual).toBeUndefined();
+    });
   });
 
   describe('max', () => {
@@ -16,6 +22,12 @@ describe('helpers', () => {
       const values = [{ value: 7 }, { value: 13 }, { value: 2 }, { value: 5 }];
       const actual = max(values, (item) => item.value);
       expect(actual).toStrictEqual({ value: 13 });
+    });
+
+    test('empty array', () => {
+      const values: { value: number }[] = [];
+      const actual = max(values, (item) => item.value);
+      expect(actual).toBeUndefined();
     });
   });
 

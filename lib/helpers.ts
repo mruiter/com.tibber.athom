@@ -51,13 +51,37 @@ export const sum = <T>(
 };
 
 export const min = <T>(arr: readonly T[], predicate: (item: T) => number) => {
-  const minimum = Math.min(...arr.map(predicate));
-  return arr.find((item) => predicate(item) === minimum);
+  if (arr.length === 0) return undefined;
+
+  let minimum = arr[0];
+  let minimumValue = predicate(minimum);
+
+  for (let i = 1; i < arr.length; i += 1) {
+    const value = predicate(arr[i]);
+    if (value < minimumValue) {
+      minimum = arr[i];
+      minimumValue = value;
+    }
+  }
+
+  return minimum;
 };
 
 export const max = <T>(arr: readonly T[], predicate: (item: T) => number) => {
-  const maximum = Math.max(...arr.map(predicate));
-  return arr.find((item) => predicate(item) === maximum);
+  if (arr.length === 0) return undefined;
+
+  let maximum = arr[0];
+  let maximumValue = predicate(maximum);
+
+  for (let i = 1; i < arr.length; i += 1) {
+    const value = predicate(arr[i]);
+    if (value > maximumValue) {
+      maximum = arr[i];
+      maximumValue = value;
+    }
+  }
+
+  return maximum;
 };
 
 type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
