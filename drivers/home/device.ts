@@ -15,6 +15,7 @@ import {
   TimeString,
   min,
   max,
+  startOfQuarterHour,
 } from '../../lib/helpers';
 import {
   ERROR_CODE_HOME_NOT_FOUND,
@@ -324,9 +325,7 @@ export class HomeDevice extends Device {
         await this.#generateConsumptionReport(now);
       }
 
-      const nextUpdateTime = moment()
-        .add(1, 'hour')
-        .startOf('hour')
+      const nextUpdateTime = startOfQuarterHour(moment().add(15, 'minutes'))
         .add(randomBetweenRange(0, 2.5 * 60), 'seconds');
 
       this.log(
@@ -378,7 +377,7 @@ export class HomeDevice extends Device {
     // NOTE: this also updates capability values
     this.#updateLowestAndHighestPrice(now);
 
-    const currentHour = now.clone().startOf('hour');
+    const currentHour = startOfQuarterHour(now);
 
     const currentPrice = this.#prices.today.find((p) =>
       currentHour.isSame(p.startsAt),
@@ -850,7 +849,7 @@ export class HomeDevice extends Device {
 
   getDeviceData() {
     const now = moment();
-    const currentHour = now.clone().startOf('hour');
+    const currentHour = startOfQuarterHour(now);
     const currentPrice =
       this.#prices.today.find((p) => currentHour.isSame(p.startsAt)) || 0;
 

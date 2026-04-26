@@ -36,7 +36,7 @@ export const averagePrice = (
           hourlyPrices.filter((p) =>
             hours! > 0
               ? p.startsAt.isAfter(now)
-              : p.startsAt.isBefore(now, 'hour'),
+              : p.startsAt.isBefore(now),
           ),
           hours,
         )
@@ -92,7 +92,7 @@ export const priceExtremes = (
           hourlyPrices.filter((p) =>
             hours! > 0
               ? p.startsAt.isAfter(now)
-              : p.startsAt.isBefore(now, 'hour'),
+              : p.startsAt.isBefore(now),
           ),
           hours,
         )
@@ -193,7 +193,7 @@ export const lowestPricesWithinTimeFrame = (
   }
 
   const pricesWithinTimeFrame = hourlyPrices.filter(
-    (p) => p.startsAt.isSameOrAfter(start, 'hour') && p.startsAt.isBefore(end),
+    (p) => p.startsAt.isSameOrAfter(start) && p.startsAt.isBefore(end),
   );
 
   if (!pricesWithinTimeFrame.length) {

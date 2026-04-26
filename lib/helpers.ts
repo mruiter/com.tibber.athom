@@ -15,6 +15,13 @@ export const parseTimeString = (time: TimeString): moment.Moment => {
     .startOf('minute');
 };
 
+export const startOfQuarterHour = (value: moment.Moment): moment.Moment =>
+  value
+    .clone()
+    .second(0)
+    .millisecond(0)
+    .minute(Math.floor(value.minute() / 15) * 15);
+
 // takes from end of array if `quantity` is negative
 export const takeFromStartOrEnd = <T>(arr: T[], quantity?: number): T[] => {
   if (quantity === undefined) return [];
