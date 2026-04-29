@@ -16,7 +16,14 @@ export const initiateOauth = async (
     .substring(0, 10);
   const redirectUrl = 'https://callback.athom.com/oauth2/callback/';
   const apiBaseUrl = 'https://thewall.tibber.com';
-  const apiAuthUrl = `${apiBaseUrl}/connect/authorize?state=${state}&scope=tibber_graph&response_type=code&client_id=${env.CLIENT_ID}&redirect_uri=${redirectUrl}`;
+  const authQuery = new URLSearchParams({
+    state,
+    scope: 'tibber_graph',
+    response_type: 'code',
+    client_id: env.CLIENT_ID,
+    redirect_uri: redirectUrl,
+  });
+  const apiAuthUrl = `${apiBaseUrl}/connect/authorize?${authQuery.toString()}`;
 
   const myOAuth2Callback = await cloud.createOAuth2Callback(apiAuthUrl);
   myOAuth2Callback
